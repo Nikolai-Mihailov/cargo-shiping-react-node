@@ -37,12 +37,11 @@ export default function ButtonAppBar() {
             <AppBar position="static" color="default">
                 <Container maxWidth="lg">
                     <Toolbar>
-                        <Typography variant="title" className={classes.title}>Shipping App</Typography>
+                        <Typography variant="subtitle1" className={classes.title}>Shipping App</Typography>
                         <div className={classes.rightToolbar}>
-                           <Button color="textPrimary">Товари</Button>
-                          <Button color="textPrimary">Камиони</Button>
-                           <Button color="textPrimary">Акаунт</Button>
-
+                            <Button color="primary">Товари</Button>
+                            <Button color="primary">Камиони</Button>
+                            <Button color="primary">Акаунт</Button>
                             <Link href="/login"><Button color="primary">Вход</Button></Link>
                             <Link href="/signup"><Button className={classes.registrationButton}>Регистрация</Button></Link>
                         </div>

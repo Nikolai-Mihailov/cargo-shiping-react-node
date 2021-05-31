@@ -30,7 +30,7 @@ export default class Server {
             next();
         });
         // Routes
-        app.use('/api', UsersController);
+        app.use('/api/users', UsersController);
         // To improve error handling !!
         // Error handling
         app.use((req, res, next) => {

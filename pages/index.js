@@ -5,6 +5,8 @@ import Image from 'next/image';
 
 
 export default function Home() {
+
+
   return (
     <React.Fragment>
       <Grid container direction="column">
@@ -13,7 +15,7 @@ export default function Home() {
 
             <Grid item>
               <div>
-                <Image src="/../static/assets/img/navImage.jpg" height="300px" width="1000px" quality="100" />
+                <Image src="/static/assets/img/navImage.jpg" height="300px" width="1000px" quality="100" />
                 <Typography variant="h2">
                   Безплатен тестов период
                 </Typography>
@@ -33,7 +35,7 @@ export default function Home() {
               <Typography variant="h4">Услуги</Typography>
             </Grid>
             <Grid item>
-              <Image src="/../static/assets/img/favpng_logistics-management-inventory-business.png" width="300px" height="300px" quality="100" />
+              <Image src="/static/assets/img/favpng_logistics-management-inventory-business.png" width="300px" height="300px" quality="100" />
 
             </Grid>
           </Grid>

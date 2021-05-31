@@ -8,79 +8,125 @@ datasource db {
 }
 
 model cargos {
-  cargo_id        Int      @id @default(autoincrement())
+  cargo_id        Int                 @id @default(autoincrement())
   user_id         Int
-  country_from    String   @db.VarChar(255)
-  country_to      String   @db.VarChar(255)
-  city_from       String   @db.VarChar(255)
-  city_to         String   @db.VarChar(255)
-  address_from    String   @db.VarChar(255)
-  address_to      String   @db.VarChar(255)
-  loading_date    DateTime @db.DateTime(0)
-  delivery_date   DateTime @db.DateTime(0)
-  circular_course Int      @db.TinyInt
+  country_from    String              @db.VarChar(255)
+  country_to      String              @db.VarChar(255)
+  city_from       String              @db.VarChar(255)
+  city_to         String              @db.VarChar(255)
+  address_from    String              @db.VarChar(255)
+  address_to      String              @db.VarChar(255)
+  loading_date    DateTime            @db.DateTime(0)
+  delivery_date   DateTime            @db.DateTime(0)
+  circular_course Int                 @db.TinyInt
   weight          Int
   size            Int
-  cargo_type      String
-  vehicle_type    String
-  registered      DateTime @default(now()) @db.DateTime(6)
+  cargo_type      cargos_cargo_type
+  vehicle_type    cargos_vehicle_type
+  registered      DateTime            @default(now()) @db.DateTime(6)
 }
 
 model companies {
-  company_id       Int            @id @default(autoincrement())
+  company_id       Int                     @id @default(autoincrement())
   user_id          Int
-  company_name     String         @db.VarChar(255)
-  country          String         @db.VarChar(255)
-  city             String         @db.VarChar(255)
-  street           String         @db.VarChar(255)
-  owner_first_name String         @db.VarChar(255)
-  owner_last_name  String         @db.VarChar(255)
-  phone            Int
-  registrationDate DateTime       @default(now()) @db.DateTime(6)
-  expirationDate   DateTime       @default(now()) @db.DateTime(6)
-  business_type    String
+  company_name     String                  @unique @db.VarChar(255)
+  country          String                  @db.VarChar(255)
+  city             String                  @db.VarChar(255)
+  address          String                  @db.VarChar(255)
+  owner_first_name String                  @db.VarChar(255)
+  owner_last_name  String                  @db.VarChar(255)
+  phone            String                  @db.VarChar(50)
+  business_type    companies_business_type
   eik              Int
-  postcode         String         @db.VarChar(255)
-  users            users          @relation(fields: [user_id], references: [id])
-  subscriptions    subscriptions?
+  postcode         String                  @db.VarChar(255)
+  date_registered  DateTime                @db.Date
+  users            users                   @relation(fields: [user_id], references: [user_id])
+  subscriptions    subscriptions[]
 
-  @@index([user_id], name: "FK_ee0839cba07cb0c52602021ad4b")
+  @@index([user_id], name: "dev_idx")
 }
 
-model company_accounts {
-  account_id        Int      @id @default(autoincrement())
-  company_id        Int
-  group_id          Int
-  first_name        String   @db.VarChar(255)
-  last_name         String   @db.VarChar(255)
-  email             String   @db.VarChar(255)
-  phone             Int
-  registration_date DateTime @default(now()) @db.DateTime(6)
-  expiration_date   DateTime @default(now()) @db.DateTime(6)
+model roles {
+  id      Int        @id @default(autoincrement())
+  user_id Int
+  type    roles_type @unique
+  users   users      @relation(fields: [user_id], references: [user_id])
+
+  @@index([user_id], name: "user_id")
 }
 
 model subscriptions {
-  subscription_id   Int       @id @default(autoincrement())
-  company_id        Int       @unique
-  subscription_type String
-  status            String
-  registration_date DateTime  @default(now()) @db.DateTime(6)
-  expiration_date   DateTime  @default(now()) @db.DateTime(6)
-  companies         companies @relation(fields: [company_id], references: [company_id])
+  subscription_id   Int                             @unique @default(autoincrement())
+  company_id        Int
+  subscription_type subscriptions_subscription_type
+  subscription_date DateTime                        @db.Date
+  expiration_date   DateTime                        @db.Date
+  companies         companies                       @relation(fields: [company_id], references: [company_id])
+
+  @@index([company_id], name: "company_id_idx")
 }
 
 model users {
-  id        Int         @id @default(autoincrement())
-  username  String      @db.VarChar(255)
-  email     String      @db.VarChar(255)
-  password  String      @db.VarChar(255)
+  user_id   Int         @id @default(autoincrement())
+  username  String      @db.VarChar(100)
+  email     String      @db.VarChar(100)
+  password  String      @db.VarChar(100)
   companies companies[]
+  roles     roles[]
 
-  @@unique([username, email], name: "IDX_772886e2f1f47b9ceb04a06e20")
+  @@unique([username, email], name: "usernameAndEmail")
 }
 
-model users_groups {
-  group_id          Int    @id @default(autoincrement())
-  group_name        String @db.VarChar(255)
-  group_description String @db.VarChar(255)
+enum cargos_cargo_type {
+  groupage
+  complete
+  groupage_complete
+  oversized
+  refrigerated
+  refrigerated_groupage
+  refrigerated_complete
+  refrigerated_grouped_complete
+  bulk
+  poured
+}
+
+enum cargos_vehicle_type {
+  trailer
+  hanger
+  refrigeration
+  van
+  minibus
+  dressage
+  solo
+  jumbo
+  tug
+  platform
+  onboard
+  container_ship
+  tank
+  megatrailer
+  car_carrier
+  gondola
+  oversized
+  tail_lift
+  crane
+}
+
+enum companies_business_type {
+  manufacturer
+  logistics_center
+  forwarder
+  merchant
+  farmer
+}
+
+enum roles_type {
+  admin
+  owner
+  user
+}
+
+enum subscriptions_subscription_type {
+  free
+  paid
 }

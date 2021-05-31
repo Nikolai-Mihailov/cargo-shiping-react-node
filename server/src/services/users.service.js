@@ -1,19 +1,17 @@
 import Prisma from '@prisma/client';
 const { PrismaClient } = Prisma;
+const prisma = new PrismaClient();
 
-export default class UsersService extends PrismaClient {
+export default class UsersService {
 
 
-    constructor() {
-    
-    }
 
     async signup(params = {}) {
 
         let { username, email, password } = params;
 
         try {
-            PrismaClient.users.ge
+
             const userExists = await prisma.users.findFirst({
                 where: {
                     username,

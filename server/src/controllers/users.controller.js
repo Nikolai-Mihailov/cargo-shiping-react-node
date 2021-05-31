@@ -11,7 +11,7 @@ router.post('/singin', async (req, res, next) => {
 
     try {
 
-        const { email, username, password } = req.body;
+        const { email, username, password, eik, companyName, ownerFirstName, ownerLastName } = req.body;
         userServise.signup({ email, username });
 
         const accessToken = jwt.sign(user, process.env.ACCESS_TOKEN);

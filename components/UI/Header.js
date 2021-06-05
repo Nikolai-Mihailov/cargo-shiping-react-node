@@ -31,7 +31,8 @@ const useStyles = makeStyles((theme) => ({
     },
     registrationButton: {
         color: '#fff',
-        backgroundColor: '#3f51b5'
+        backgroundColor: '#3f51b5',
+        margin:'10px'
     },
     mobileMenuIcon: {
         height: "30px",
@@ -50,10 +51,12 @@ export default function ButtonAppBar() {
     const desktopMenu = (
         <React.Fragment>
             <div className={classes.rightToolbar}>
+                  <Link href="/"><Button color="primary">Начало</Button></Link>
                 <Button color="primary">Товари</Button>
                 <Button color="primary">Акаунт</Button>
+                <Link href="/pricing"><Button color="primary">Цени</Button></Link>
                 <Link href="/login"><Button color="primary">Вход</Button></Link>
-                <Link href="/signup"><Button className={classes.registrationButton}>Регистрация</Button></Link>
+                <Link href="/signup2"><Button className={classes.registrationButton}>Регистрация</Button></Link>
             </div>
         </React.Fragment>
     );
@@ -61,6 +64,11 @@ export default function ButtonAppBar() {
         <React.Fragment>
             <SwipeableDrawer disableBackdropTransition={!iOS} disableDiscovery={iOS} anchor='right' open={openDrawer} onClose={() => setOpenDrawer(false)} onOpen={() => setOpenDrawer(true)}>
                 <List disablePadding>
+                <Link href="/" passHref>
+                        <ListItem button divider component="a" onClick={() => setOpenDrawer(false)}>
+                            <ListItemText>Начало</ListItemText>
+                        </ListItem>
+                    </Link>
                     <Link href="/cargos" passHref>
                         <ListItem button divider component="a" onClick={() => setOpenDrawer(false)}>
                             <ListItemText>Товари</ListItemText>
@@ -71,12 +79,17 @@ export default function ButtonAppBar() {
                             <ListItemText>Акаунт</ListItemText>
                         </ListItem>
                     </Link>
+                    <Link href="/pricing" passHref>
+                        <ListItem button divider component="a" onClick={() => setOpenDrawer(false)}>
+                            <ListItemText>Цени</ListItemText>
+                        </ListItem>
+                    </Link>
                     <Link href="/login" passHref >
                         <ListItem button divider component="a" onClick={() => setOpenDrawer(false)}>
                             <ListItemText>Вход</ListItemText>
                         </ListItem>
                     </Link>
-                    <Link href="/signup" passHref >
+                    <Link href="/signup2" passHref >
                         <ListItem button divider component="a" onClick={() => setOpenDrawer(false)}>
                             <ListItemText>Регистрация</ListItemText>
                         </ListItem>

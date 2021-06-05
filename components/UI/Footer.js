@@ -1,51 +1,88 @@
 import React from 'react';
-import PropTypes from 'prop-types';
-import { makeStyles } from '@material-ui/core/styles';
-import Container from '@material-ui/core/Container';
+import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
 import Link from '@material-ui/core/Link';
+import { makeStyles } from '@material-ui/core/styles';
+import Container from '@material-ui/core/Container';
+import Box from '@material-ui/core/Box';
+import Divider from '@material-ui/core/Divider'
 
 function Copyright() {
     return (
         <Typography variant="body2" color="textSecondary" align="center">
             {'Copyright © '}
-            <Link color="inherit" href="https://material-ui.com/">
-                Your Website
-      </Link>{' '}
-            {new Date().getFullYear()}
-            {'.'}
         </Typography>
     );
 }
 
 const useStyles = makeStyles((theme) => ({
-    footer: {
-        backgroundColor: theme.palette.background.paper,
-        // marginTop: theme.spacing(8),
-        padding: theme.spacing(6, 0),
+    '@global': {
+      ul: {
+        margin: 0,
+        padding: 0,
+        listStyle: 'none',
+      },
     },
-}));
+    footer: {
+      borderTop: `1px solid ${theme.palette.divider}`,
+      marginTop: theme.spacing(8),
+    //   paddingTop: theme.spacing(3),
+      paddingBottom: theme.spacing(3),
+      [theme.breakpoints.up('sm')]: {
+        paddingTop: theme.spacing(6),
+        paddingBottom: theme.spacing(6),
+      },
+    },
+  }));
+
+const footers = [
+    {
+      title: 'За нас',
+      description: ['Кои сме ние', 'Контакти'],
+    },
+    {
+      title: 'Някви неща',
+      description: ['бля бля', 'бля бля', 'бля бля', 'бля бля', 'бля бля'],
+    },
+    {
+      title: 'Други неща',
+      description: ['Ресулрси', 'бля бля', 'бля бля', 'Fбля бля'],
+    },
+    {
+      title: 'Правни',
+      description: ['Политика за поверителност', 'Условия за ползване'],
+    },
+  ];
 
 export default function Footer(props) {
     const classes = useStyles();
-    const { description, title } = props;
 
     return (
         <footer className={classes.footer}>
-            <Container maxWidth="lg">
-                <Typography variant="h6" align="center" gutterBottom>
-                    {title}
-                </Typography>
-                <Typography variant="subtitle1" align="center" color="textSecondary" component="p">
-                    {description}
-                </Typography>
-                <Copyright />
-            </Container>
+             <Container maxWidth="md" component="footer" >
+        <Grid container spacing={4} justify="space-evenly">
+         <Divider />
+          {footers.map((footer) => (
+            <Grid item xs={6} sm={3} key={footer.title}>
+              <Typography variant="h6" color="textPrimary" gutterBottom>
+                {footer.title}
+              </Typography>
+              <ul>
+                {footer.description.map((item) => (
+                  <li key={item}>
+                    <Link href="#" variant="subtitle1" color="textSecondary">
+                      {item}
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </Grid>
+          ))}
+        </Grid>
+        <Box mt={5}>
+          <Copyright />
+        </Box>
+      </Container>
         </footer>
     );
 }
-
-Footer.propTypes = {
-    description: PropTypes.string,
-    title: PropTypes.string,
-};

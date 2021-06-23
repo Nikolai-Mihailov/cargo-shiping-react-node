@@ -7,6 +7,7 @@ import Checkbox from '@material-ui/core/Checkbox';
 import FormControl from '@material-ui/core/FormControl';
 import InputLabel from '@material-ui/core/InputLabel';
 import Select from '@material-ui/core/Select'
+import Button from '@material-ui/core/Button'
 import {RegistrationContext} from '../../context/RegistrationContext';
 import { useEffect, useContext } from "react";
 
@@ -45,18 +46,15 @@ export default function CompanyForm() {
             autoComplete="cc-number"
           />
         </Grid>
-        <Grid item xs={12} md={6}>
-          <TextField required id="expDate" label="Expiry date" fullWidth autoComplete="cc-exp" />
-        </Grid>
-        <Grid item xs={12} md={6}>
-        <FormControl variant="outlined"  fullWidth required>
+        <Grid item xs={12} md={12}>
+        <FormControl variant="standard"  fullWidth required>
                 <InputLabel label="Абонаментен план">Абонаментен план</InputLabel>
                 <Select
                   native
                   value={subscription}
                   onChange={handleSubscriptionChange}
                   label="Абонаментен план"
-                  variant="outlined"
+                  variant="standard"
                 >
                   <option aria-label="" value="" />
                   <option value={1}>Един месец</option>
@@ -107,6 +105,10 @@ export default function CompanyForm() {
             fullWidth
             autoComplete="shipping country"
           />
+        </Grid>
+        <Grid item xs={12} sm={6} alignItems="flex-end">
+        <Typography variant="inherit"> Качване на документи</Typography>
+        <Button spacing={21} variant="contained" component="label">Upload File  <input type="file" hidden /></Button>
         </Grid>
       </Grid>
     </React.Fragment>

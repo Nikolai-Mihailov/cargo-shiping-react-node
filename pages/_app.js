@@ -1,17 +1,30 @@
 import React from "react";
 import PropTypes from "prop-types";
 import Head from "next/head";
-import { ThemeProvider } from "@material-ui/core/styles";
+import { ThemeProvider, createMuiTheme,responsiveFontSizes,MuiThemeProvider } from "@material-ui/core/styles";
 import CssBaseline from "@material-ui/core/CssBaseline";
-import theme from "../src/theme";
+// import theme from "../src/theme";
 import Layout from "../components/Layout";
-import Header from "../components/UI/Header"
 // import { HeaderProvider } from "../context/HeaderContext";
-import { RegistrationProvider } from "../context/RegistrationContext"
+import { RegistrationProvider } from "../context/RegistrationContext";
+import {blue, indigo} from '@material-ui/core/colors'
+
 
 export default function MyApp({ Component, pageProps }) {
 
-
+  let theme = createMuiTheme({
+    palette: {
+      primary: {
+        main:blue[500],
+        contrastText:'#fff'
+      },
+      secondary: {
+        main:indigo[400],
+        contrastText:'#fff'
+      }
+    },
+  });
+  theme = responsiveFontSizes(theme);
   React.useEffect(() => {
     // Remove the server-side injected CSS.
     const jssStyles = document.querySelector("#jss-server-side");
@@ -29,15 +42,16 @@ export default function MyApp({ Component, pageProps }) {
           content="minimum-scale=1, initial-scale=1, width=device-width"
         />
       </Head>
-      <RegistrationProvider>
-        <ThemeProvider theme={theme}>
+        <MuiThemeProvider theme={theme}>
+
+          <RegistrationProvider>
           <Layout>
             {/* CssBaseline kickstart an elegant, consistent, and simple baseline to build upon. */}
             <CssBaseline />
             <Component {...pageProps} />
           </Layout>
-        </ThemeProvider>
-      </RegistrationProvider>
+         </RegistrationProvider>
+        </MuiThemeProvider>
     </React.Fragment>
 
   );

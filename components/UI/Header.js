@@ -14,6 +14,7 @@ import SwipeableDrawer from "@material-ui/core/SwipeableDrawer";
 import List from "@material-ui/core/List";
 import ListItem from "@material-ui/core/ListItem";
 import ListItemText from "@material-ui/core/ListItemText";
+import useScrollTrigger from "@material-ui/core/useScrollTrigger";
 
 const useStyles = makeStyles((theme) => ({
   rightToolbar: {
@@ -43,12 +44,26 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
+function ElevationScroll(props) {
+  const { children, window } = props;
+  const trigger = useScrollTrigger({
+    disableHysteresis: true,
+    threshold: 0,
+    target: window ? window() : undefined,
+  });
+
+  return React.cloneElement(children, {
+    elevation: trigger ? 4 : 0,
+  });
+}
+
 export default function ButtonAppBar() {
   const classes = useStyles();
   const theme = useTheme();
   const view = useMediaQuery(theme.breakpoints.down("md"));
   const iOS = process.browser && /iPad|iPhone|iPod/.test(navigator.userAgent);
   const [openDrawer, setOpenDrawer] = useState(false);
+
   const desktopMenu = (
     <React.Fragment>
       <div className={classes.rightToolbar} color="inherit">
@@ -148,18 +163,20 @@ export default function ButtonAppBar() {
   );
   return (
     <div className={classes.root}>
-      <AppBar position="fixed" className={classes.navBarColor}>
-        <React.Fragment>
-          <Container maxWidth="lg">
-            <Toolbar>
-              <Typography variant="subtitle1" className={classes.title}>
-                Shipping App
-              </Typography>
-              {view ? mobileMenu : desktopMenu}
-            </Toolbar>
-          </Container>
-        </React.Fragment>
-      </AppBar>
+      <ElevationScroll>
+        <AppBar position="fixed" className={classes.navBarColor}>
+          <React.Fragment>
+            <Container maxWidth="lg">
+              <Toolbar>
+                <Typography variant="subtitle1" className={classes.title}>
+                  Shipping App
+                </Typography>
+                {view ? mobileMenu : desktopMenu}
+              </Toolbar>
+            </Container>
+          </React.Fragment>
+        </AppBar>
+      </ElevationScroll>
     </div>
   );
 }

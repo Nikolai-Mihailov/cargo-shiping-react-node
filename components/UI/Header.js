@@ -45,11 +45,10 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 function ElevationScroll(props) {
-  const { children, window } = props;
+  const { children } = props;
   const trigger = useScrollTrigger({
     disableHysteresis: true,
     threshold: 0,
-    target: window ? window() : undefined,
   });
 
   return React.cloneElement(children, {
@@ -165,16 +164,14 @@ export default function ButtonAppBar() {
     <div className={classes.root}>
       <ElevationScroll>
         <AppBar position="fixed" className={classes.navBarColor}>
-          <React.Fragment>
-            <Container maxWidth="lg">
-              <Toolbar>
-                <Typography variant="subtitle1" className={classes.title}>
-                  Shipping App
-                </Typography>
-                {view ? mobileMenu : desktopMenu}
-              </Toolbar>
-            </Container>
-          </React.Fragment>
+          <Container maxWidth="lg">
+            <Toolbar>
+              <Typography variant="subtitle1" className={classes.title}>
+                Shipping App
+              </Typography>
+              {view ? mobileMenu : desktopMenu}
+            </Toolbar>
+          </Container>
         </AppBar>
       </ElevationScroll>
     </div>

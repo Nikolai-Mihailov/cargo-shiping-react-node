@@ -66,24 +66,24 @@ export default function ButtonAppBar() {
   const desktopMenu = (
     <React.Fragment>
       <div className={classes.rightToolbar} color="inherit">
-        <Link href="/" passHref>
+        <Link href="/">
           <Button color="inherit">Начало</Button>
         </Link>
-        <Button color="inherit" passHref>
-          Товари
-        </Button>
-        <Link href="/account" passHref>
+        <Link href="/cargos">
+          <Button color="inherit">Товари</Button>
+        </Link>
+        <Link href="/account">
           <Button color="inherit">Акаунт</Button>
         </Link>
-        <Link href="/pricing" passHref>
+        <Link href="/pricing">
           <Button color="inherit">Цени</Button>
         </Link>
-        <Link href="/login" passHref>
+        <Link href="/login">
           <Button color="inherit" className={classes.registrationButton}>
             Вход
           </Button>
         </Link>
-        <Link href="/signup2" passHref>
+        <Link href="/signup2">
           <Button className={classes.registrationButton}>Регистрация</Button>
         </Link>
       </div>
@@ -99,7 +99,7 @@ export default function ButtonAppBar() {
         onClose={() => setOpenDrawer(false)}
         onOpen={() => setOpenDrawer(true)}>
         <List disablePadding>
-          <Link href="/" passHref>
+          <Link href="/">
             <ListItem
               button
               divider
@@ -108,7 +108,7 @@ export default function ButtonAppBar() {
               <ListItemText>Начало</ListItemText>
             </ListItem>
           </Link>
-          <Link href="/cargos" passHref>
+          <Link href="/cargos">
             <ListItem
               button
               divider
@@ -117,7 +117,7 @@ export default function ButtonAppBar() {
               <ListItemText>Товари</ListItemText>
             </ListItem>
           </Link>
-          <Link href="/account" passHref>
+          <Link href="/account">
             <ListItem
               button
               divider
@@ -126,7 +126,7 @@ export default function ButtonAppBar() {
               <ListItemText>Акаунт</ListItemText>
             </ListItem>
           </Link>
-          <Link href="/pricing" passHref>
+          <Link href="/pricing">
             <ListItem
               button
               divider
@@ -135,7 +135,7 @@ export default function ButtonAppBar() {
               <ListItemText>Цени</ListItemText>
             </ListItem>
           </Link>
-          <Link href="/login" passHref>
+          <Link href="/login">
             <ListItem
               button
               divider
@@ -144,7 +144,7 @@ export default function ButtonAppBar() {
               <ListItemText>Вход</ListItemText>
             </ListItem>
           </Link>
-          <Link href="/signup2" passHref>
+          <Link href="/signup2">
             <ListItem
               button
               divider

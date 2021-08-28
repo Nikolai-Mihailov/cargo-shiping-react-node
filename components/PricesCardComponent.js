@@ -18,7 +18,11 @@ const useStyles = makeStyles((theme) => ({
     },
   },
   cardHeader: {
-    backgroundColor: theme.palette.primary.main,
+    backgroundColor: theme.palette.secondary.main,
+    color: theme.palette.primary.contrastText,
+  },
+  whiteText: {
+    color: theme.palette.primary.contrastText,
   },
   cardPricing: {
     display: "flex",

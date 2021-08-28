@@ -82,78 +82,83 @@ export default function Pricing() {
   const classes = useStyles();
 
   return (
-    <Box pt={20}>
-      <CssBaseline />
-      {/* Hero unit */}
-      <Box pb={10}>
-        <Typography
-          component="h1"
-          variant="h2"
-          align="center"
-          color="textPrimary"
-          gutterBottom>
-          Цени
-        </Typography>
-        <Typography
-          variant="h5"
-          align="center"
-          color="textSecondary"
-          component="p">
-          Изберете най-подходящият план за вас и вашата фирма.
-        </Typography>
-      </Box>
-      {/* End hero unit */}
-      <Container maxWidth="md" component="main">
-        <Grid container spacing={2} alignItems="flex-end">
-          {tiers.map((tier) => (
-            // Enterprise card is full width at sm breakpoint
-            <Grid item key={tier.title} xs={12} sm={6} md={3}>
-              <Card>
-                <CardHeader
-                  title={tier.title}
-                  subheader={tier.subheader}
-                  titleTypographyProps={{ align: "center" }}
-                  subheaderTypographyProps={{ align: "center" }}
-                  action={tier.title === "Един месец" ? <StarIcon /> : null}
-                  className={classes.cardHeader}
-                />
-                <CardContent>
-                  <Box>
-                    <Typography>Това е стандартен план </Typography>
-                  </Box>
-                  <div className={classes.cardPricing}>
-                    <Typography component="h2" variant="h3" color="textPrimary">
-                      ${tier.price}
-                    </Typography>
-                    <Typography variant="h6" color="textSecondary">
-                      /mo
-                    </Typography>
-                  </div>
-                  <ul>
-                    {tier.description.map((line) => (
+    <Container>
+      <Box pt={20}>
+        <CssBaseline />
+        {/* Hero unit */}
+        <Box pb={10}>
+          <Typography
+            component="h1"
+            variant="h2"
+            align="center"
+            color="textPrimary"
+            gutterBottom>
+            Цени
+          </Typography>
+          <Typography
+            variant="h5"
+            align="center"
+            color="textSecondary"
+            component="p">
+            Изберете най-подходящият план за вас и вашата фирма.
+          </Typography>
+        </Box>
+        {/* End hero unit */}
+        <Container maxWidth="md" component="main">
+          <Grid container spacing={2} alignItems="flex-end">
+            {tiers.map((tier) => (
+              // Enterprise card is full width at sm breakpoint
+              <Grid item key={tier.title} xs={12} sm={6} md={3}>
+                <Card>
+                  <CardHeader
+                    title={tier.title}
+                    subheader={tier.subheader}
+                    titleTypographyProps={{ align: "center" }}
+                    subheaderTypographyProps={{ align: "center" }}
+                    action={tier.title === "Един месец" ? <StarIcon /> : null}
+                    className={classes.cardHeader}
+                  />
+                  <CardContent>
+                    <Box>
+                      <Typography>Това е стандартен план </Typography>
+                    </Box>
+                    <div className={classes.cardPricing}>
                       <Typography
-                        component="li"
-                        variant="subtitle1"
-                        align="center"
-                        key={line}>
-                        {line}
+                        component="h2"
+                        variant="h3"
+                        color="textPrimary">
+                        ${tier.price}
                       </Typography>
-                    ))}
-                  </ul>
-                </CardContent>
-                <CardActions>
-                  <Button
-                    fullWidth
-                    variant={tier.buttonVariant}
-                    color="primary">
-                    {tier.buttonText}
-                  </Button>
-                </CardActions>
-              </Card>
-            </Grid>
-          ))}
-        </Grid>
-      </Container>
-    </Box>
+                      <Typography variant="h6" color="textSecondary">
+                        /mo
+                      </Typography>
+                    </div>
+                    <ul>
+                      {tier.description.map((line) => (
+                        <Typography
+                          component="li"
+                          variant="subtitle1"
+                          align="center"
+                          key={line}>
+                          {line}
+                        </Typography>
+                      ))}
+                    </ul>
+                  </CardContent>
+                  <CardActions>
+                    <Button
+                      fullWidth
+                      variant={tier.buttonVariant}
+                      color="primary">
+                      {tier.buttonText}
+                    </Button>
+                  </CardActions>
+                </Card>
+              </Grid>
+            ))}
+          </Grid>
+        </Container>
+      </Box>
+    </Container>
   );
 }
